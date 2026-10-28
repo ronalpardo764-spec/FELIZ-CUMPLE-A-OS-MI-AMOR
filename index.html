@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para mi amor Jhoselin ❤️</title>
+  
+  <!-- Tailwind CSS para diseño lindo y moderno -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Canvas-Confetti para la lluvia de confeti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- Lucide Icons para íconos bonitos -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Fuentes románticas desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #ffb3c6 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .font-carta {
+      font-family: 'Caveat', cursive;
+    }
+
+    /* Animación del botón principal */
+    .btn-latido {
+      animation: latido 1.8s infinite;
+    }
+
+    @keyframes latido {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.6); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(225, 29, 72, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+    }
+
+    /* Animación de entrada suave */
+    .fade-in {
+      animation: fadeIn 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corazones flotantes de fondo */
+    .corazon-flotante {
+      position: absolute;
+      color: rgba(255, 77, 109, 0.4);
+      animation: flotar 8s infinite linear;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes flotar {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body class="relative flex flex-col items-center justify-center p-4 min-h-screen">
+
+  <!-- Corazones Flotantes de Fondo -->
+  <div id="contenedor-corazones" class="fixed inset-0 pointer-events-none overflow-hidden"></div>
+
+  <!-- Música de fondo (Puedes cambiar 'musica.mp3' por tu archivo de música) -->
+  <audio id="musicaFondo" loop preload="auto">
+    <source src="musica.mp3" type="audio/mpeg">
+    <!-- Enlace de respaldo por si no tienes mp3 local aún -->
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112185.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ========================================== -->
+  <!-- PANTALLA 1: BOTÓN DE BIENVENIDA -->
+  <!-- ========================================== -->
+  <div id="pantalla1" class="z-10 text-center flex flex-col items-center justify-center min-h-screen w-full max-w-md px-4">
+    <div class="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-pink-200 w-full flex flex-col items-center gap-6">
+      <div class="relative">
+        <i data-lucide="heart" class="w-20 h-20 text-rose-500 animate-pulse fill-rose-500"></i>
+      </div>
+      
+      <h1 class="text-2xl font-bold text-gray-800 leading-tight">
+        ¡Hola hermosa! Tengo algo especial para ti ❤️
+      </h1>
+
+      <!-- BOTÓN EXACTO SOLICITADO -->
+      <button id="btnInicio" onclick="iniciarSorpresa()" class="btn-latido w-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold py-5 px-6 rounded-2xl shadow-lg transform transition active:scale-95 text-lg uppercase tracking-wide">
+        TOCA AQUI SI ERES EL AMOR DE MI VIDA JHOSELIN
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- PANTALLA 2 Y 3: CARTA Y GALERÍA (OCULTAS AL INICIO) -->
+  <!-- ========================================== -->
+  <div id="pantallaPrincipal" class="hidden z-10 w-full max-w-3xl my-8 px-2 fade-in">
+    
+    <!-- Encabezado de Cumpleaños -->
+    <div class="text-center mb-8">
+      <span class="inline-block px-4 py-1.5 bg-rose-100 text-rose-600 rounded-full text-sm font-semibold mb-3 border border-rose-200 shadow-sm">
+        🎉 ¡Feliz Cumpleaños, Mi Amor! 🎂
+      </span>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-rose-600 drop-shadow-sm">
+        Jhoselin ❤️
+      </h1>
+    </div>
+
+    <!-- PANTALLA 2: TARJETA DE LA CARTA DE AMOR -->
+    <div class="bg-white/90 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-xl border border-pink-100 mb-10 transform hover:scale-[1.01] transition duration-300">
+      <div class="flex items-center gap-2 mb-4 text-rose-500 border-b border-rose-100 pb-3">
+        <i data-lucide="mail-open" class="w-6 h-6"></i>
+        <h2 class="text-xl font-bold text-gray-800">Mi Mensaje Para Ti</h2>
+      </div>
+
+      <!-- TEXTO EXACTO DE LA CARTA SOLICITADO -->
+      <p class="font-carta text-2xl md:text-3xl text-gray-800 leading-relaxed text-center px-2 py-4 bg-rose-50/50 rounded-2xl border border-rose-100/60">
+        "te amo mucho quiero que sigas cambiando mi vida poco ha poco que nunca me digas que ya no me quieres si no yo mi wa matar Wii TE AMO MI AMOR ❤️"
+      </p>
+    </div>
+
+    <!-- PANTALLA 3: GALERÍA DE 8 FOTOS -->
+    <div class="bg-white/90 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-xl border border-pink-100 mb-8">
+      <div class="flex items-center gap-2 mb-6 text-rose-500 border-b border-rose-100 pb-3">
+        <i data-lucide="camera" class="w-6 h-6"></i>
+        <h2 class="text-xl font-bold text-gray-800">Nuestros Hermosos Recuerdos 📸</h2>
+      </div>
+
+      <!-- Cuadrícula de 8 Fotos Adaptable (Responsive) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        
+        <!-- Foto 1 -->
+        <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-md bg-rose-100 border-2 border-white hover:shadow-xl transition duration-300">
+          <img src="foto1.jpg" onerror="this.src='https://placehold.co/400x400/ffb3c6/ffffff?text=Foto+1'" alt="Foto 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-2">
+            <span class="text-white text-xs font-semibold">Foto 1 ❤️</span>
+          </div>
+        </div>
+
+        <!-- Foto 2 -->
+        <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-md bg-rose-100 border-2 border-white hover:shadow-xl transition duration-300">
+          <img src="foto2.jpg" onerror="this.src='https://placehold.co/400x400/ffb3c6/ffffff?text=Foto+2'" alt="Foto 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-2">
+            <span class="text-white text-xs font-semibold">Foto 2 ❤️</span>
+          </div>
+        </div>
+
+        <!-- Foto 3 -->
+        <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-md bg-rose-100 border-2 border-white hover:shadow-xl transition duration-300">
+          <img src="foto3.jpg" onerror="this.src='https://placehold.co/400x400/ffb3c6/ffffff?text=Foto+3'" alt="Foto 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-2">
+            <span class="text-white text-xs font-semibold">Foto 3 ❤️</span>
+          </div>
+        </div>
+
+        <!-- Foto 4 -->
+        <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-md bg-rose-100 border-2 border-white hover:shadow-xl transition duration-300">
+          <img src="foto4.jpg" onerror="this.src='https://placehold.co/400x400/ffb3c6/ffffff?text=Foto+4'" alt="Foto 4" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-2">
+            <span class="text-white text-xs font-semibold">Foto 4 ❤️</span>
+          </div>
+        </div>
+
+        <!-- Foto 5 -->
+        <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-md bg-rose-100 border-2 border-white hover:shadow-xl transition duration-300">
+          <img src="foto5.jpg" onerror="this.src='https://placehold.co/400x400/ffb3c6/ffffff?text=Foto+5'" alt="Foto 5" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-2">
+            <span class="text-white text-xs font-semibold">Foto 5 ❤️</span>
+          </div>
+        </div>
+
+        <!-- Foto 6 -->
+        <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-md bg-rose-100 border-2 border-white hover:shadow-xl transition duration-300">
+          <img src="foto6.jpg" onerror="this.src='https://placehold.co/400x400/ffb3c6/ffffff?text=Foto+6'" alt="Foto 6" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-2">
+            <span class="text-white text-xs font-semibold">Foto 6 ❤️</span>
+          </div>
+        </div>
+
+        <!-- Foto 7 -->
+        <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-md bg-rose-100 border-2 border-white hover:shadow-xl transition duration-300">
+          <img src="foto7.jpg" onerror="this.src='https://placehold.co/400x400/ffb3c6/ffffff?text=Foto+7'" alt="Foto 7" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-2">
+            <span class="text-white text-xs font-semibold">Foto 7 ❤️</span>
+          </div>
+        </div>
+
+        <!-- Foto 8 -->
+        <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-md bg-rose-100 border-2 border-white hover:shadow-xl transition duration-300">
+          <img src="foto8.jpg" onerror="this.src='https://placehold.co/400x400/ffb3c6/ffffff?text=Foto+8'" alt="Foto 8" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-2">
+            <span class="text-white text-xs font-semibold">Foto 8 ❤️</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Pie de página romántico -->
+    <div class="text-center pb-8 text-rose-700 font-medium">
+      <p>Hecho con todo mi amor especialmente para ti 💖</p>
+    </div>
+
+  </div>
+
+  <script>
+    // Inicializar Íconos Lucide
+    lucide.createIcons();
+
+    // Crear corazones flotantes dinámicamente en el fondo
+    function crearCorazonesDeFondo() {
+      const contenedor = document.getElementById('contenedor-corazones');
+      const cantidad = 15;
+
+      for (let i = 0; i < cantidad; i++) {
+        const corazon = document.createElement('div');
+        corazon.classList.add('corazon-flotante');
+        corazon.innerHTML = '❤️';
+        corazon.style.left = `${Math.random() * 100}%`;
+        corazon.style.animationDuration = `${5 + Math.random() * 5}s`;
+        corazon.style.animationDelay = `${Math.random() * 5}s`;
+        corazon.style.fontSize = `${14 + Math.random() * 20}px`;
+        contenedor.appendChild(corazon);
+      }
+    }
+
+    // Función principal al hacer clic en el botón
+    function iniciarSorpresa() {
+      // 1. Ocultar pantalla de bienvenida y mostrar la principal
+      document.getElementById('pantalla1').classList.add('hidden');
+      document.getElementById('pantallaPrincipal').classList.remove('hidden');
+
+      // 2. Reproducir la música
+      const musica = document.getElementById('musicaFondo');
+      musica.play().catch(e => console.log("Auto-play de audio prevenido por navegador"));
+
+      // 3. Efecto de Confeti Romántico (Rosas y Rojos)
+      lanzarConfeti();
+
+      // Desplazarse suavemente arriba por si acaso
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Efectos visuales de confeti
+    function lanzarConfeti() {
+      const duracion = 3 * 1000;
+      const fin = Date.now() + duracion;
+
+      (function frame() {
+        confetti({
+          particleCount: 4,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff']
+        });
+        confetti({
+          particleCount: 4,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ['#ff4d6d', '#ff758f', '#ffb3c6', '#ffffff']
+        });
+
+        if (Date.now() < fin) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+
+    // Generar corazones al cargar la página
+    window.onload = crearCorazonesDeFondo;
+  </script>
+</body>
+</html>
